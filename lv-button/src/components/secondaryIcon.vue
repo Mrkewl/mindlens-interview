@@ -2,19 +2,25 @@
 export default
     {
         name: 'color',
-        props: ['color'],
+        name: 'disable',
+        props: ['color', 'disable'],
         data() {
             return {
                 count: 0,
+
             }
         },
         methods: {
             toggle() {
-                if (this.count >= 3) {
-                    this.count = 0;
-                } else {
-                    this.count++
-                }
+                if (this.disable) {
+
+                    return this.count
+                } else
+                    if (this.count >= 3) {
+                        this.count = 0;
+                    } else {
+                        this.count++
+                    }
 
             }
         },
@@ -25,13 +31,12 @@ export default
 
 <template>
     <button
-        :class="{ leftSecondaryiconbutton: count === 2, rightSecondaryiconbutton: count === 0, actionbutton: count === 3, iconbutton: count === 1, colorBlue: this.color === 0, colorRed: this.color === 1, colorOrange: this.color === 2, colorGreen: this.color === 3 }"
-        v-on:click="toggle">
+        :class="{ disableHover: this.disable === true, leftSecondaryiconbutton: count === 2, rightSecondaryiconbutton: count === 0, actionbutton: count === 3, iconbutton: count === 1, colorBlue: this.color === 0, colorRed: this.color === 1, colorOrange: this.color === 2, colorGreen: this.color === 3 }"
+        v-on:click="toggle" :disabled="this.disable === true">
         <slot>
             <use v-if="count === 2" class="svg">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 20L8 12L16 4" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
+                    <path d="M16 20L8 12L16 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
 
                 <!-- <svg height="18px" width="18px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -51,12 +56,12 @@ export default
                 Action
             </span>
             <use v-if="count < 2" class="svg">
-                <svg width="22" height="17" viewBox="0 0 22 17"  xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.5 8.5H20.5M20.5 8.5L13.5 15.5M20.5 8.5L13.5 1.5" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+                <svg width="22" height="17" viewBox="0 0 22 17" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 8.5H20.5M20.5 8.5L13.5 15.5M20.5 8.5L13.5 1.5" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
             </use>
-      
+
 
 
 
@@ -68,7 +73,9 @@ export default
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
 
-
+.disableHover {
+    pointer-events: none;
+}
 
 
 .svg {
@@ -81,7 +88,7 @@ export default
     border-color: #C75100;
     color: #C75100;
     fill: #C75100;
-    stroke:#C75100;
+    stroke: #C75100;
 }
 
 .colorRed {
@@ -89,7 +96,7 @@ export default
     border-color: #CC3123;
     color: #CC3123;
     fill: #CC3123;
-    stroke:#CC3123;
+    stroke: #CC3123;
 
 }
 
@@ -98,7 +105,7 @@ export default
     border-color: #C75100;
     color: #C75100;
     fill: #C75100;
-    stroke:#C75100;
+    stroke: #C75100;
 
 }
 
@@ -107,7 +114,7 @@ export default
     border-color: #008700;
     color: #008700;
     fill: #008700;
-    stroke:#008700;
+    stroke: #008700;
 
 }
 

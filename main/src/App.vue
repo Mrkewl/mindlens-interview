@@ -10,6 +10,7 @@ export default
       return {
         color: 0,
         variations: 0,
+        disable: false,
       }
     },
     methods: {
@@ -28,7 +29,19 @@ export default
           this.variations++
         }
 
-      }
+      },
+      toggledisable() {
+        if (this.disable === false) {
+
+          this.disable = true;
+          console.log(this.disable)
+        } else {
+          this.disable = false
+          console.log(this.disable)
+        }
+
+
+      },
     }
 
   }
@@ -38,7 +51,7 @@ export default
 <template>
   <div class="col">
     <notification v-bind:color="this.color" v-bind:variations="this.variations">
-      <secondaryIcon v-bind:color="this.color" />
+      <secondaryIcon v-bind:color="this.color" v-bind:disable="this.disable" />
       <primaryIcon v-bind:color="this.color" />
     </notification>
     <div class="row">
@@ -49,7 +62,13 @@ export default
       <button @click="variatedialog" class="custom-btn btn-12"><span>Hire</span><span>Me</span></button>
       <h1>Click "me" to change type</h1>
 
+
     </div>
+  </div>
+  <div class="center">
+    <h1>Click "disable" to disable secondaryIcon</h1>
+    <button @click="toggledisable" class="custom-btn btn-12"><span>button
+      </span><span>Disable</span></button>
   </div>
   <!-- <div class="space"></div> -->
 
@@ -57,6 +76,14 @@ export default
 
 
 <style scoped>
+.center {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
 .btn-12 {
   background-color: transparent;
   position: relative;
